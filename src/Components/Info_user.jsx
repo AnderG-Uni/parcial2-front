@@ -8,7 +8,6 @@ Modal.setAppElement('#root');
 
 function InfoUser({ onLogout }){
 
-    const [GetCodigos, SetCodigos] = useState(''); //almaceno los datos obtenidos 
     const [codigo, setCodigo] = useState('');
     const [DatosTabla, setDatosTabla] = useState([]); 
     const [DatosUser, setDatosUser] = useState([]); 
@@ -16,22 +15,18 @@ function InfoUser({ onLogout }){
     //if(user!=='Admin' || !user){
     //    return <Navigate to="/"/>
     //}
-
     
       const handleLogout = () => {
         localStorage.clear();
         onLogout();
       };
-      
 
     useEffect(() => {
 
         const CargarTabla = async () => {
           try {
-
             const response1 = await axios.get('http://localhost:5000/apiv1/info_user_tabla');
             setDatosTabla(response1.data);
-
           } catch (error) {
             console.error(error);
           }
@@ -39,21 +34,51 @@ function InfoUser({ onLogout }){
         
         const CargarInfoUser = async () => {
             try {
-  
               const response2 = await axios.get('http://localhost:5000/apiv1/info_user');
               setDatosUser(response2.data);
-  
+              
             } catch (error) {
               console.error(error);
             }
           };
 
-
         CargarTabla();
         CargarInfoUser();
-
         //console.log("DATOS: ", DatosUser);
     }, []);
+
+
+    const RegistraCodigo = async (e) => {
+        e.preventDefault("datos");
+        //console.log('Form submitted:', { nombre, fechaN, correo, password, celular, cedula, ciudad });
+
+        const iduser = DatosUser.map((datauser) => (datauser._id)) //guardo el id del usuario en variable
+        try {
+            const response = await fetch('http://localhost:5000/apiv1/update_codigo', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ codigo, iduser})
+            });
+
+            //validación del resultado que nos trae el backend
+            const result = await response.json();
+            if(result){ 
+                window.alert(result.status);
+                //GoTo("/");
+                //CargarTabla();
+            }else{
+                window.alert(error);
+            }
+            
+        } catch (error) {
+            console.error('Error:', error);
+            setError('Internal server error');
+        }
+    }
+
+
 
 
     return (
@@ -66,7 +91,7 @@ function InfoUser({ onLogout }){
                 <div class="container-fluid">
 
                     <a class="navbar-brand col-sm-1" href="#"> </a>
-                     {DatosUser.map((datauser) => ( <span className='m-2'> Bievenido: <h5 class="mb-0 text-center"> {datauser.user} </h5> </span> )) } 
+                     {DatosUser.map((datauser) => ( <span className='m-2'> Bievenido: <h5 class="mb-0 text-center"> {datauser.user}  </h5> </span> )) } 
                     
                     <ul class="navbar-nav ms-auto d-flex flex-row">
 
@@ -122,13 +147,13 @@ function InfoUser({ onLogout }){
                                     
                                     <div class="form-card">
                                         <h5 class="text-center ">Registra nuevos códigos</h5>
-                                        <form class="form-card" >
+                                        <form class="form-card" onSubmit={RegistraCodigo}>
 
                                             <div class="row justify-content-between text-left">
                                                 <dir class="col-sm-2"></dir>
                                                 <div class="form-group col-sm-8 flex-column d-flex"> 
                                                     <label class="form-control-label px-3" htmlFor='codigo'>Código<span class="text-danger"> *</span></label> 
-                                                    <input type="number" id="codigo" name="codigo" placeholder="1000"  required autoFocus/> </div>
+                                                    <input type="number" id="codigo" name="codigo" placeholder="1000" onChange={(e) => setCodigo(e.target.value)} required autoFocus/> </div>
                                                 <dir class="col-sm-2"></dir>
                                             </div>
 
