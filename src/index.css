@@ -3,8 +3,24 @@
   backdrop-filter: blur(30px);
 }
 .p-5{
-  background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
-  height: 200px;
+  /*background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');*/
+  height: 20px;
+}
+
+
+.logouser{
+  height: 80px;
+  width: 80px;
+}
+
+.logocodigo{
+  height: 40px;
+  width: 40px;
+}
+
+.contenedorlogin{
+  margin-top: -500px;
+  padding-top: -500px;
 }
 
 .modal {

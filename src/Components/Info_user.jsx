@@ -104,6 +104,7 @@ function InfoUser(){
                     <div class="container-fluid">
 
                         <a class="navbar-brand col-sm-1" href="#"> </a>
+                        <img className='logouser' src="https://img.icons8.com/?size=100&id=bCZuh4u5quAj&format=png&color=000000" alt='star' />
                         {DatosUser.map((datauser) => ( <span className='m-2'> Bievenido: <h5 class="mb-0 text-center"> {datauser.user}  </h5> </span> )) } 
                         
                         <ul class="navbar-nav ms-auto d-flex flex-row">
@@ -125,8 +126,8 @@ function InfoUser(){
 
                             <li class="nav-item ">
                                 <button className='btn btn-primary' onClick={handleLogout}> 
-                                    <img src="https://img.icons8.com/?size=100&id=42471&format=png&color=000000" class="rounded-circle" height="22"
-                                        alt="" loading="lazy" />  <span>Exit</span>
+                                    <img src="https://img.icons8.com/?size=100&id=rVJsmIuA2cov&format=png&color=000000" class="rounded-circle" height="22"
+                                        alt="" loading="lazy" />  <span>Cerrar Sesión</span>
                                 </button>
                             </li>
 
@@ -147,9 +148,9 @@ function InfoUser(){
                     <br />
                     </div>
                         <section class="mb-4">
-                            <div class="card mt-5">
+                            <div class="card mt-6">
 
-                            <div class="container-fluid px-1 py-5 mx-auto">
+                            <div class="container-fluid px-1 py-2 mb-4 mx-auto">
                                 <div class="row d-flex justify-content-center">
                                         
                                         <div class="form-card">
@@ -177,7 +178,7 @@ function InfoUser(){
 
                                 <div class="card-header text-center py-3">
                                     <h5 class="mb-0 text-center">
-                                        <strong>Lista de códigos registrados</strong>
+                                        <strong>Mis códigos registrados</strong>
                                     </h5>
                                 </div>
                                 <div class="card-body">
@@ -186,9 +187,9 @@ function InfoUser(){
 
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Fecha de registro</th>
-                                                    <th scope="col">Código ingresado</th>
-                                                    <th scope="col">Premio </th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=kWNiv-7wtIol&format=png&color=000000"  height="30"/> FECHA REGISTRO</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=WoUqPpzZjN8d&format=png&color=000000"  height="30"/> CÓDIGO </th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=Nh0FdkapxUe6&format=png&color=000000"  height="30"/> PREMIO </th>
                                                 </tr>
                                             </thead>
 
@@ -196,9 +197,9 @@ function InfoUser(){
                                                 {
                                                 DatosTabla.map((datospremio) => (
                                                 <tr key={datospremio._id}>
-                                                    <td>{datospremio.fecha}</td>
-                                                    <td>{datospremio.codigo}</td>
-                                                    <td>{datospremio.premio}</td>
+                                                    <td>  {datospremio.fecha}</td>
+                                                    <td>  {datospremio.codigo}</td>
+                                                    <td>  {datospremio.premio}</td>
                                                 </tr>
                                                 )) 
                                                 }

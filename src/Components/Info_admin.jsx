@@ -78,6 +78,12 @@ function InfoAdmin(){
                     <div class="container-fluid">
 
                         <a class="navbar-brand" href="#"></a>
+                        <a class="navbar-brand" href="#"></a>
+                        <a class="navbar-brand" href="#"></a>
+                        <a class="navbar-brand" href="#"></a>
+                        <a class="navbar-brand" href="#"></a>
+                        <a class="navbar-brand" href="#"></a>
+                        <img  src="https://img.icons8.com/?size=100&id=bCZuh4u5quAj&format=png&color=000000" alt='star' height="70" />
                         {DatosUser.map((datauser) => ( <span className='m-2'> Bievenido: <h5 class="mb-0 text-center"> {datauser.user}  </h5> </span> )) } 
 
                         <ul class="navbar-nav ms-auto d-flex flex-row">
@@ -98,8 +104,8 @@ function InfoAdmin(){
 
                             <li class="nav-item ">
                                 <button className='btn btn-primary' onClick={handleLogout} > 
-                                    <img src="https://img.icons8.com/?size=100&id=42471&format=png&color=000000" class="rounded-circle" height="22"
-                                        alt="" loading="lazy" />  <span>Exit</span>
+                                <img src="https://img.icons8.com/?size=100&id=rVJsmIuA2cov&format=png&color=000000" class="rounded-circle" height="22"
+                                        alt="" loading="lazy" />  <span>Cerrar Sesión</span>
                                 </button>
                             </li>
 
@@ -135,12 +141,12 @@ function InfoAdmin(){
                                         <table class="table table-hover text-nowrap ">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">NOMBRE GANADOR</th>
-                                                    <th scope="col">CÉDULA</th>
-                                                    <th scope="col">TELÉFONO</th>
-                                                    <th scope="col">CÓDIGO</th>
-                                                    <th scope="col">PREMIO $</th>
-                                                    <th scope="col">FECHA REGISTRO</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=bCZuh4u5quAj&format=png&color=000000"  height="25"/>NOMBRE GANADOR</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=tOArhjh68OPo&format=png&color=000000"  height="25"/>CÉDULA</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=67475&format=png&color=000000"  height="25"/>TELÉFONO</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=WoUqPpzZjN8d&format=png&color=000000"  height="25"/>CÓDIGO</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=Nh0FdkapxUe6&format=png&color=000000"  height="25"/>PREMIO $</th>
+                                                    <th scope="col"><img  src="https://img.icons8.com/?size=100&id=kWNiv-7wtIol&format=png&color=000000"  height="25"/> FECHA REGISTRO</th>
                                                 </tr>
                                             </thead>
 
@@ -151,8 +157,8 @@ function InfoAdmin(){
                                                     <td>{datospremios.nombre}</td>
                                                     <td>{datospremios.cedula}</td>
                                                     <td>{datospremios.telefono}</td>
-                                                    <td> <img src="https://img.icons8.com/?size=100&id=P6jWGmVbl2Mb&format=png&color=000000" height="20" alt="" loading="lazy" /> {datospremios.codigo}</td>
-                                                    <td>{datospremios.premio}</td>
+                                                    <td>{datospremios.codigo}</td>
+                                                    <td> <img src="https://img.icons8.com/?size=100&id=P6jWGmVbl2Mb&format=png&color=000000" height="20" /> {datospremios.premio}</td>
                                                     <td>{datospremios.fecha}</td>
                                                 </tr>
                                                 )) 
@@ -176,12 +182,12 @@ function InfoAdmin(){
                                         <table class="table table-hover text-nowrap ">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">NOMBRE GANADOR</th>
-                                                    <th scope="col">CÉDULA</th>
-                                                    <th scope="col">TELÉFONO</th>
-                                                    <th scope="col">CÓDIGO</th>
-                                                    <th scope="col">PREMIO $</th>
-                                                    <th scope="col">FECHA REGISTRO</th>
+                                                <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=bCZuh4u5quAj&format=png&color=000000"  height="25"/>NOMBRE GANADOR</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=tOArhjh68OPo&format=png&color=000000"  height="25"/>CÉDULA</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=67475&format=png&color=000000"  height="25"/>TELÉFONO</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=WoUqPpzZjN8d&format=png&color=000000"  height="25"/>CÓDIGO</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=Nh0FdkapxUe6&format=png&color=000000"  height="25"/>PREMIO $</th>
+                                                    <th scope="col"><img  src="https://img.icons8.com/?size=100&id=kWNiv-7wtIol&format=png&color=000000"  height="25"/> FECHA REGISTRO</th>
                                                 </tr>
                                             </thead>
 
@@ -193,7 +199,7 @@ function InfoAdmin(){
                                                     <td>{datospremios.cedula}</td>
                                                     <td>{datospremios.telefono}</td>
                                                     <td>{datospremios.codigo}</td>
-                                                    <td>{datospremios.premio}</td>
+                                                    <td> <img src="https://img.icons8.com/?size=100&id=P6jWGmVbl2Mb&format=png&color=000000" height="20" /> {datospremios.premio}</td>
                                                     <td>{datospremios.fecha}</td>
                                                 </tr>
                                                 )) 
@@ -217,12 +223,12 @@ function InfoAdmin(){
                                         <table class="table table-hover text-nowrap ">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">NOMBRE GANADOR</th>
-                                                    <th scope="col">CÉDULA</th>
-                                                    <th scope="col">TELÉFONO</th>
-                                                    <th scope="col">CÓDIGO</th>
-                                                    <th scope="col">PREMIO $</th>
-                                                    <th scope="col">FECHA REGISTRO</th>
+                                                <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=bCZuh4u5quAj&format=png&color=000000"  height="25"/>NOMBRE GANADOR</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=tOArhjh68OPo&format=png&color=000000"  height="25"/>CÉDULA</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=67475&format=png&color=000000"  height="25"/>TELÉFONO</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=WoUqPpzZjN8d&format=png&color=000000"  height="25"/>CÓDIGO</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=Nh0FdkapxUe6&format=png&color=000000"  height="25"/>PREMIO $</th>
+                                                    <th scope="col"><img  src="https://img.icons8.com/?size=100&id=kWNiv-7wtIol&format=png&color=000000"  height="25"/> FECHA REGISTRO</th>
                                                 </tr>
                                             </thead>
 
@@ -234,7 +240,7 @@ function InfoAdmin(){
                                                     <td>{datospremios.cedula}</td>
                                                     <td>{datospremios.telefono}</td>
                                                     <td>{datospremios.codigo}</td>
-                                                    <td>{datospremios.premio}</td>
+                                                    <td> <img src="https://img.icons8.com/?size=100&id=P6jWGmVbl2Mb&format=png&color=000000" height="20" /> {datospremios.premio}</td>
                                                     <td>{datospremios.fecha}</td>
                                                 </tr>
                                                 )) 
@@ -258,12 +264,12 @@ function InfoAdmin(){
                                         <table class="table table-hover text-nowrap ">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">NOMBRE</th>
-                                                    <th scope="col">CÉDULA</th>
-                                                    <th scope="col">TELÉFONO</th>
-                                                    <th scope="col">CÓDIGO</th>
-                                                    <th scope="col">PREMIO </th>
-                                                    <th scope="col">FECHA REGISTRO</th>
+                                                <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=bCZuh4u5quAj&format=png&color=000000"  height="25"/>NOMBRE GANADOR</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=tOArhjh68OPo&format=png&color=000000"  height="25"/>CÉDULA</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=67475&format=png&color=000000"  height="25"/>TELÉFONO</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=WoUqPpzZjN8d&format=png&color=000000"  height="25"/>CÓDIGO</th>
+                                                    <th scope="col"> <img  src="https://img.icons8.com/?size=100&id=Nh0FdkapxUe6&format=png&color=000000"  height="25"/>PREMIO $</th>
+                                                    <th scope="col"><img  src="https://img.icons8.com/?size=100&id=kWNiv-7wtIol&format=png&color=000000"  height="25"/> FECHA REGISTRO</th>
                                                 </tr>
                                             </thead>
 
@@ -275,7 +281,7 @@ function InfoAdmin(){
                                                     <td>{datospremios.cedula}</td>
                                                     <td>{datospremios.telefono}</td>
                                                     <td>{datospremios.codigo}</td>
-                                                    <td>{datospremios.premio}</td>
+                                                    <td> <img src="https://img.icons8.com/?size=100&id=97743&format=png&color=000000" height="20" /> {datospremios.premio}</td>
                                                     <td>{datospremios.fecha}</td>
                                                 </tr>
                                                 )) 
