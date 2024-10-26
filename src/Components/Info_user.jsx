@@ -100,7 +100,6 @@ function InfoUser(){
         return (
             <>
             <header>
-
                 <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top border">
                     <div class="container-fluid">
 
