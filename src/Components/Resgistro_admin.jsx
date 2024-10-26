@@ -53,8 +53,8 @@ function RegistroAdmin(){
                             <div class="row justify-content-between text-left">
                                 <dir class="col-sm-2"></dir>
                                 <div class="form-group col-sm-8 flex-column d-flex"> 
-                                    <label class="form-control-label px-3" htmlFor="correo">Usuario<span class="text-danger"> *</span></label> 
-                                    <input type="text" id="correo" name="correo" placeholder="example@example.com" onChange={(e) => setcorreo(e.target.value)} required minLength="5" /> </div>
+                                    <label class="form-control-label px-3" htmlFor="email">Usuario<span class="text-danger"> *</span></label> 
+                                    <input type="email" id="email" name="email" placeholder="example@example.com" onChange={(e) => setcorreo(e.target.value)} required minLength="5" /> </div>
                                 <dir class="col-sm-2"></dir>
                             </div>
                             <div class="row justify-content-between text-left mt-4">

@@ -1,213 +1,226 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import '../index.css'
 
-Modal.setAppElement('#root');
 
-function InfoUser({ onLogout }){
 
-    const [codigo, setCodigo] = useState('');
-    const [DatosTabla, setDatosTabla] = useState([]); 
-    const [DatosUser, setDatosUser] = useState([]); 
-   
-    //if(user!=='Admin' || !user){
-    //    return <Navigate to="/"/>
-    //}
+function InfoUser(){
+
+    const USUARIO = localStorage.getItem("id"); //obtengo el (ID) del usuario autenticado  del local storage
+    //const ROLE = localStorage.getItem("rol"); //obtengo el (ID) del usuario autenticado  del local storage
     
-      const handleLogout = () => {
-        localStorage.clear();
-        onLogout();
-      };
+    if(USUARIO){
 
-    useEffect(() => {
-
-        const CargarTabla = async () => {
-          try {
-            const response1 = await axios.get('http://localhost:5000/apiv1/info_user_tabla');
-            setDatosTabla(response1.data);
-          } catch (error) {
-            console.error(error);
-          }
+        const [codigo, setCodigo] = useState('');
+        const [DatosTabla, setDatosTabla] = useState([]); 
+        const [DatosUser, setDatosUser] = useState([]);
+        const [AuditLogin, setAuditLogin] = useState([]); 
+        
+        
+        const handleLogout = () => {
+            localStorage.clear();
+            window.location = 'http://localhost:5173/'
         };
-        
-        const CargarInfoUser = async () => {
+
+        //---------------------------- Obtengo la información de la tabla y del usuario ------------------------- Terminao 
+        useEffect(() => {
+
+            const CargarTabla = async () => {
             try {
-              const response2 = await axios.get('http://localhost:5000/apiv1/info_user');
-              setDatosUser(response2.data);
-              
+                const iduser = localStorage.getItem("id"); //obtengo el (ID) del usuario autenticado  del local storage
+                const response1 = await axios.post('http://localhost:5000/apiv1/info_user_tabla', {iduser});
+                setDatosTabla(response1.data);
             } catch (error) {
-              console.error(error);
+                console.error(error);
             }
-          };
-
-        CargarTabla();
-        CargarInfoUser();
-        //console.log("DATOS: ", DatosUser);
-    }, []);
-
-
-    const RegistraCodigo = async (e) => {
-        e.preventDefault("datos");
-        //console.log('Form submitted:', { nombre, fechaN, correo, password, celular, cedula, ciudad });
-
-        const iduser = DatosUser.map((datauser) => (datauser._id)) //guardo el id del usuario en variable
-        try {
-            const response = await fetch('http://localhost:5000/apiv1/update_codigo', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ codigo, iduser})
-            });
-
-            //validación del resultado que nos trae el backend
-            const result = await response.json();
-            if(result){ 
-                window.alert(result.status);
-                //GoTo("/");
-                //CargarTabla();
-            }else{
-                window.alert(error);
-            }
+            };
             
-        } catch (error) {
-            console.error('Error:', error);
-            setError('Internal server error');
-        }
-    }
+            const CargarInfoUser = async () => {
+                try {
+                    const user = localStorage.getItem("user"); //obtengo el (usuario) del usuario autenticado  del local storage
+                    const response2 = await axios.post('http://localhost:5000/apiv1/info_user', {user});
+                    setDatosUser(response2.data);
+                } catch (error) {
+                console.error(error);
+                }
+            };
 
+            const CargarAccessLogin = async () => {
+                try {
+                    const user = localStorage.getItem("user"); //obtengo el (usuario) del usuario autenticado  del local storage
+                    const response3 = await axios.post('http://localhost:5000/apiv1/info_audit_users', {user});
+                    setAuditLogin(response3.data);
+                } catch (error) {
+                console.error(error);
+                }
+            };
 
+            CargarTabla();
+            CargarInfoUser();
+            CargarAccessLogin();
+        }, []);
 
+        //---------------------------- Registor de codigos y recargo de tabla ------------------------- Terminado 
+        const RegistraCodigo = async (e) => {
+            e.preventDefault("datoss");
 
-    return (
-        <>
-        
-        <header>
+            const iduser = DatosUser.map((datauser) => (datauser._id)) //guardo el id del usuario en variable
+            try {
+                const response = await fetch('http://localhost:5000/apiv1/update_codigo', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ codigo, iduser})
+                });
 
-            <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top border">
+                const result = await response.json();
+                if(result){ 
+                window.alert(result.status);  // información del estado del codigo registrado
 
-                <div class="container-fluid">
+                    try {
+                        //Recargo la tabla
+                        const iduser = localStorage.getItem("id"); //obtengo el (ID) del usuario autenticado  del local storage
+                        const response = await axios.post('http://localhost:5000/apiv1/info_user_tabla', {iduser})
+                        setDatosTabla(response.data);
+                    } catch (error) {
+                        console.error('Error consultando nuevamente los datos:', error);
+                    }
 
-                    <a class="navbar-brand col-sm-1" href="#"> </a>
-                     {DatosUser.map((datauser) => ( <span className='m-2'> Bievenido: <h5 class="mb-0 text-center"> {datauser.user}  </h5> </span> )) } 
-                    
-                    <ul class="navbar-nav ms-auto d-flex flex-row">
-
-                        <div className='pt-2 d-none d-md-flex input-group w-auto my-auto'><span> <strong>ultimo acceso: </strong> 24/12/2024 16:15 PM  </span></div>
-
-                        <li class="nav-item">
-                            <a class="nav-link me-3 me-lg-0" href="#">
-                                <i class="fas fa-fill-drip"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item me-3 me-lg-0">
-                            <a class="nav-link" href="#">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </li>
-
-                        <li class="nav-item ">
-                            <button className='btn btn-primary' onClick={handleLogout}> 
-                                <img src="https://img.icons8.com/?size=100&id=42471&format=png&color=000000" class="rounded-circle" height="22"
-                                    alt="" loading="lazy" />  <span>Exit</span>
-                            </button>
-                        </li>
-
-                        <li class="nav-item me-3 me-lg-0">
-                            <a class="nav-link" href="#">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        
-        
-            {
-                //aqui empieza la tabla de infomación
+                }else{
+                    window.alert(error);
             }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
 
+        return (
+            <>
+            <header>
 
-            <main>
-                <div class="container pt-4">
+                <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top border">
+                    <div class="container-fluid">
 
-                <div className='card-body'>
-                <br />
-                </div>
-                    <section class="mb-4">
-                        <div class="card mt-5">
+                        <a class="navbar-brand col-sm-1" href="#"> </a>
+                        {DatosUser.map((datauser) => ( <span className='m-2'> Bievenido: <h5 class="mb-0 text-center"> {datauser.user}  </h5> </span> )) } 
+                        
+                        <ul class="navbar-nav ms-auto d-flex flex-row">
 
-
-                        <div class="container-fluid px-1 py-5 mx-auto">
-                            <div class="row d-flex justify-content-center">
-                                    
-                                    <div class="form-card">
-                                        <h5 class="text-center ">Registra nuevos códigos</h5>
-                                        <form class="form-card" onSubmit={RegistraCodigo}>
-
-                                            <div class="row justify-content-between text-left">
-                                                <dir class="col-sm-2"></dir>
-                                                <div class="form-group col-sm-8 flex-column d-flex"> 
-                                                    <label class="form-control-label px-3" htmlFor='codigo'>Código<span class="text-danger"> *</span></label> 
-                                                    <input type="number" id="codigo" name="codigo" placeholder="1000" onChange={(e) => setCodigo(e.target.value)} required autoFocus/> </div>
-                                                <dir class="col-sm-2"></dir>
-                                            </div>
-
-                                            <div class="row justify-content-between text-left mt-3">
-                                                <dir class="col-sm-2"></dir>
-                                                <div class="form-group col-sm-8"> <button type="submit" class="btn btn-primary">Registrar</button> </div>
-                                                <dir class="col-sm-2"></dir>
-                                            </div>
-                                        </form>
-                                    </div>
-                                
+                            <div className='pt-2 d-none d-md-flex input-group w-auto my-auto'>
+                                {AuditLogin.map((auditlogin) => ( <span className='m-2'> <strong>Ultimo acceso: </strong> {auditlogin.fecha}</span> )) } 
                             </div>
-                        </div>
 
+                            <li class="nav-item">
+                                <a class="nav-link me-3 me-lg-0" href="#">
+                                    <i class="fas fa-fill-drip"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item me-3 me-lg-0">
+                                <a class="nav-link" href="#">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </li>
 
-                            <div class="card-header text-center py-3">
-                                <h5 class="mb-0 text-center">
-                                    <strong>Lista de códigos registrados</strong>
-                                </h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover text-nowrap ">
+                            <li class="nav-item ">
+                                <button className='btn btn-primary' onClick={handleLogout}> 
+                                    <img src="https://img.icons8.com/?size=100&id=42471&format=png&color=000000" class="rounded-circle" height="22"
+                                        alt="" loading="lazy" />  <span>Exit</span>
+                                </button>
+                            </li>
 
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Fecha de registro</th>
-                                                <th scope="col">Código ingresado</th>
-                                                <th scope="col">Premio </th>
-                                            </tr>
-                                        </thead>
+                            <li class="nav-item me-3 me-lg-0">
+                                <a class="nav-link" href="#">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </li>
 
-                                        <tbody>
-                                            { DatosTabla.map((datospremio) => (
-                                            <tr key={datospremio._id}>
-                                                <td>{datospremio.fecha}</td>
-                                                <td>{datospremio.codigo}</td>
-                                                <td>{datospremio.premio}</td>
-                                            </tr>
-                                            )) 
-                                             } 
-                                            
-                                        </tbody>
-                                    </table>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            
+                <main>
+                    <div class="container pt-4">
+                    <div className='card-body'>
+                    <br />
+                    </div>
+                        <section class="mb-4">
+                            <div class="card mt-5">
+
+                            <div class="container-fluid px-1 py-5 mx-auto">
+                                <div class="row d-flex justify-content-center">
+                                        
+                                        <div class="form-card">
+                                            <h5 class="text-center ">Registra nuevos códigos</h5>
+                                            <form class="form-card" onSubmit={RegistraCodigo}>
+
+                                                <div class="row justify-content-between text-left">
+                                                    <dir class="col-sm-2"></dir>
+                                                    <div class="form-group col-sm-8 flex-column d-flex"> 
+                                                        <label class="form-control-label px-3" htmlFor='codigo'>Código<span class="text-danger"> *</span></label> 
+                                                        <input type="number" id="codigo" name="codigo" placeholder="*****" onChange={(e) => setCodigo(e.target.value)} required autoFocus/> </div>
+                                                    <dir class="col-sm-2"></dir>
+                                                </div>
+
+                                                <div class="row justify-content-between text-left mt-3">
+                                                    <dir class="col-sm-2"></dir>
+                                                    <div class="form-group col-sm-8"> <button type="submit" class="btn btn-primary">Registrar</button> </div>
+                                                    <dir class="col-sm-2"></dir>
+                                                </div>
+                                            </form>
+                                        </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
 
-                </div>
-            </main>
-            
-        </>
-    )
+
+                                <div class="card-header text-center py-3">
+                                    <h5 class="mb-0 text-center">
+                                        <strong>Lista de códigos registrados</strong>
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover text-nowrap ">
+
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Fecha de registro</th>
+                                                    <th scope="col">Código ingresado</th>
+                                                    <th scope="col">Premio </th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                {
+                                                DatosTabla.map((datospremio) => (
+                                                <tr key={datospremio._id}>
+                                                    <td>{datospremio.fecha}</td>
+                                                    <td>{datospremio.codigo}</td>
+                                                    <td>{datospremio.premio}</td>
+                                                </tr>
+                                                )) 
+                                                }
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+                </main>
+                
+            </>
+        )
+
+    }else{
+        //Se redirecciona al login si no existe una varia de usuario valida 
+        window.location= 'http://localhost:5173/'
+    }
 }
 
 export default InfoUser

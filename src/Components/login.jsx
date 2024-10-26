@@ -2,12 +2,17 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import React, { useState } from "react";
 import Modal from 'react-modal';
 import '../index.css'
+
 Modal.setAppElement('#root');
 
-function Login({ onLoginSuccess }){
+function Login(){
+
+    const Navigate = useNavigate();
     const [correo, setCorreo] = useState(null);
     const [password, setPassword] = useState(null);
     const [error, setError] = useState('');
+
+
 
     const handleSubmitLogin = async (e) => {
         e.preventDefault();
@@ -22,44 +27,41 @@ function Login({ onLoginSuccess }){
             },
             body: JSON.stringify({ correo, password })
           });
-    
+
           const result = await response.json();
+          //const iduser = result.id;
+          //console.log("id del usuario logueado: -> ", iduser, "datos completos:", result);
     
           if (result.status === "Bienvenido") {
 
             if(result.rol === "User"){
-                console.log(`User: ${result.user}, Role: ${result.rol}`);
-                localStorage.setItem('id', result._id);
+                //console.log(`User: ${result.user}, Role: ${result.rol}`);
+                localStorage.setItem('id', result.id);
                 localStorage.setItem('user', result.user);
                 localStorage.setItem('role', result.rol);
-                //Navigate("/info_user");
-                onLoginSuccess(result.rol);
+                Navigate("/InfoUser");
+
+                //onLoginSuccess(result.rol);
             } else if (result.rol === "Admin"){
-                console.log(`User: ${result.user}, Role: ${result.rol}`);
-                localStorage.setItem('id', result._id);
+                //console.log(`User: ${result.user}, Role: ${result.rol}`);
+                localStorage.setItem('id', result.id);
                 localStorage.setItem('user', result.user);
                 localStorage.setItem('role', result.rol);
-                //Navigate("/info_user");
-                onLoginSuccess(result.rol);
+                Navigate("/infoAdmin");
+                //onLoginSuccess(result.rol);
             }
             
           } else {
-            setError('Error en las credenciales');
-
+            //setError('Usuario o clave incorrecto');
             //if (error === null) { console.log(error) }else {console.log(error)}
-            window.alert(error);
+            window.alert("Usuario o clave incorrecto");
 
           }
         } catch (error) {
           console.error('Error:', error);
-          setError('Error en las credenciales');
+          window.alert("Ha ocurrido un error al consultar las credenciales.");
+          //setError('Error en las credenciales');
         }
-    };
-
-    //console.log('errorr::', error);
-
-    const closeModal = () => {
-        setError('');
     };
 
       

@@ -11,18 +11,18 @@ import NewAdmin from './Components/Resgistro_admin.jsx';
 
 
 function App() {
-  //const [user, setUser] = useState(0)
+  const [user, setUser] = useState(0)
 
   return (
 
     <BrowserRouter>
       {/* <Navigation/> */}
       <Routes>
-        <Route index ></Route>
-        <Route path='/InfoUser' ></Route>
-        <Route path='/InfoAdmin' ></Route>
-        <Route path='/NewUser' ></Route>
-        <Route path='/NewAdmin' ></Route>
+        <Route index element={<Login callback={setUser}/>}></Route>
+        <Route path='/InfoUser'  element={<InfoUser user={user}/>}> </Route>
+        <Route path='/InfoAdmin' element={<InfoAdmin user={user}/>} ></Route>
+        <Route path='/NewUser' element={<NewUser user={user}/>} ></Route>
+        <Route path='/NewAdmin' element={<NewAdmin user={user}/>} ></Route>
       </Routes>
     </BrowserRouter>
 

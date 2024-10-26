@@ -1,205 +1,303 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 import '../index.css'
 
+
 function InfoAdmin(){
+
+
+    const USUARIO = localStorage.getItem("id"); //obtengo el (ID) del usuario autenticado  del local storage    
+    if(USUARIO){
    
+        const [DatosTabla1, setDatosTabla1] = useState([]);
+        const [DatosTabla2, setDatosTabla2] = useState([]);
+        const [DatosTabla3, setDatosTabla3] = useState([]);
+        const [DatosTabla4, setDatosTabla4] = useState([]); 
+        const [DatosUser, setDatosUser] = useState([]);
+        const [AuditLogin, setAuditLogin] = useState([]); 
 
-    //const home = useNavigate();
+        const handleLogout = () => {
+            localStorage.clear();
+            window.location = 'http://localhost:5173/'
+        };
 
-   
+        useEffect(() => {
 
-    //function goHome(){
-    //    home("/");
-    //}
+            const CargarTablas = async () => {
+            try {
+                //const iduser = localStorage.getItem("id"); //obtengo el (ID) del usuario autenticado  del local storage
+                const response1 = await axios.post('http://localhost:5000/apiv1/info_admin_tabla1');
+                setDatosTabla1(response1.data);
 
-    function handleClick(e){
-        // console.log(signoEditar);
-        // console.log(textoEditar);
-        e.preventDefault();
-        fetch(`https://horoscopo-api-ander.vercel.app/v1/signos/${signoEditar}`, {
-            method: 'PATCH',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({"textoEditar": textoEditar})
-        })
-    }
+                const response2 = await axios.post('http://localhost:5000/apiv1/info_admin_tabla2');
+                setDatosTabla2(response2.data);
 
+                const response3 = await axios.post('http://localhost:5000/apiv1/info_admin_tabla3');
+                setDatosTabla3(response3.data);
 
-    return (
+                const response4 = await axios.post('http://localhost:5000/apiv1/info_admin_tabla4');
+                setDatosTabla4(response4.data);
 
-        <>
-        <header>
-
-            <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top border">
-
-                <div class="container-fluid">
-
-                    <a class="navbar-brand" href="#">
-                        <img src="https://img.icons8.com/?size=100&id=18666&format=png&color=000000" height="35" alt="" loading="lazy" />
-                    </a>
-
-                    <form class="d-none d-md-flex input-group w-auto my-auto">
-                        <input autocomplete="off" type="search" class="form-control rounded"
-                            placeholder='Search...' />
-                        
-                    </form>
-
-                    <span className='m-2'><h5 class="mb-0 text-center"> Bievenido:  Admin</h5> </span>
-
-
-                    <ul class="navbar-nav ms-auto d-flex flex-row">
-
-                        <div className='pt-2 d-none d-md-flex input-group w-auto my-auto'><span> <strong>ultimo acceso: </strong> 24/12/2024 16:15 PM  </span></div>
-
-                        <li class="nav-item">
-                            <a class="nav-link me-3 me-lg-0" href="#">
-                                <i class="fas fa-fill-drip"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item me-3 me-lg-0">
-                            <a class="nav-link" href="#">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </li>
-
-                        <li class="nav-item ">
-                            <button className='btn btn-primary' > 
-                                <img src="https://img.icons8.com/?size=100&id=42471&format=png&color=000000" class="rounded-circle" height="22"
-                                    alt="" loading="lazy" />  <span>Exit</span>
-                            </button>
-                        </li>
-
-                        <li class="nav-item me-3 me-lg-0">
-                            <a class="nav-link" href="#">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        
-            {
-                //aqui empieza la tabla de infomación
+            } catch (error) {
+                console.error(error);
             }
-            <main>
-                <div class="container pt-4">
+            };
+            
+            const CargarInfoUser = async () => {
+                try {
+                    const user = localStorage.getItem("user"); //obtengo el (usuario) del usuario autenticado  del local storage
+                    const response2 = await axios.post('http://localhost:5000/apiv1/info_user', {user});
+                    setDatosUser(response2.data);
+                } catch (error) {
+                console.error(error);
+                }
+            };
 
-                <div className='card-body'>
-                <br />
-                </div>
-                    <section class="mb-4">
-                        <div class="card mt-5">
-                            <div class="card-header text-center py-3">
-                                <h5 class="mb-0 text-center">
-                                    <strong>Lista de usuarios ganadores</strong>
-                                </h5>
+            const CargarAccessLogin = async () => {
+                try {
+                    const user = localStorage.getItem("user"); //obtengo el (usuario) del usuario autenticado  del local storage
+                    const response3 = await axios.post('http://localhost:5000/apiv1/info_audit_users', {user});
+                    setAuditLogin(response3.data);
+                } catch (error) {
+                console.error(error);
+                }
+            };
+
+            CargarTablas();
+            CargarInfoUser();
+            CargarAccessLogin();
+        }, []);
+
+
+        return (
+
+            <>
+            <header>
+                <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top border">
+                    <div class="container-fluid">
+
+                        <a class="navbar-brand" href="#"></a>
+                        {DatosUser.map((datauser) => ( <span className='m-2'> Bievenido: <h5 class="mb-0 text-center"> {datauser.user}  </h5> </span> )) } 
+
+                        <ul class="navbar-nav ms-auto d-flex flex-row">
+                            <div className='pt-2 d-none d-md-flex input-group w-auto my-auto'>
+                                {AuditLogin.map((auditlogin) => ( <span className='m-2'> <strong>Ultimo acceso: </strong> {auditlogin.fecha}</span> )) } 
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover text-nowrap ">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Fecha</th>
-                                                <th scope="col">Nombre</th>
-                                                <th scope="col">Cedula</th>
-                                                <th scope="col">Telefono</th>
-                                                <th scope="col">Código</th>
-                                                <th scope="col">Premio</th>
-                                            </tr>
-                                        </thead>
 
-                                        <tbody>
-                                            <tr>
+                            <li class="nav-item">
+                                <a class="nav-link me-3 me-lg-0" href="#">
+                                    <i class="fas fa-fill-drip"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item me-3 me-lg-0">
+                                <a class="nav-link" href="#">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </li>
+
+                            <li class="nav-item ">
+                                <button className='btn btn-primary' onClick={handleLogout} > 
+                                    <img src="https://img.icons8.com/?size=100&id=42471&format=png&color=000000" class="rounded-circle" height="22"
+                                        alt="" loading="lazy" />  <span>Exit</span>
+                                </button>
+                            </li>
+
+                            <li class="nav-item me-3 me-lg-0">
+                                <a class="nav-link" href="#">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            
+
+                <main>
+                    <div class="container pt-4">
+
+                    <div className='card-body'>
+                    <br />
+                    </div>
+                        <section class="mb-4">
+
+                            {/* tabla 1 millon */}
+                            <div class="card mt-5">
+                                <div class="card-header text-center py-3">
+                                    <h5 class="mb-0 text-center">
+                                        <strong>Usuarios ganadores de 1 millón</strong>
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover text-nowrap ">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">NOMBRE</th>
+                                                    <th scope="col">CÉDULA</th>
+                                                    <th scope="col">TELÉFONO</th>
+                                                    <th scope="col">CÓDIGO</th>
+                                                    <th scope="col">PREMIO</th>
+                                                    <th scope="col">FECHA</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                {
+                                                DatosTabla1.map((datospremios) => (
+                                                <tr key={datospremios._id}>
+                                                    <td>{datospremios.nombre}</td>
+                                                    <td>{datospremios.cedula}</td>
+                                                    <td>{datospremios.telefono}</td>
+                                                    <td>{datospremios.codigo}</td>
+                                                    <td>{datospremios.premio}</td>
+                                                    <td>{datospremios.fecha}</td>
+                                                </tr>
+                                                )) 
+                                                }
                                                 
-                                                <td>228</td>
-                                                <td>350</td>
-                                                <td>$4,787.64</td>
-                                                <td>$13.68</td>
-                                                <td>$4,787.64</td>
-                                                <td>$13.68</td>
-                                            </tr>
-                                            <tr>
-                                                
-                                                <td>
-                                                    <span class="text-danger">
-                                                        <i class="fas fa-caret-down me-1"></i><span>-48.8%%</span>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="text-success">
-                                                        <i class="fas fa-caret-up me-1"></i><span>29.6%</span>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="text-success">
-                                                        <i class="fas fa-caret-up me-1"></i><span>14.0%</span>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="text-success">
-                                                        <i class="fas fa-caret-up me-1"></i><span>46.4%</span>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="text-success">
-                                                        <i class="fas fa-caret-up me-1"></i><span>29.6%</span>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="text-danger">
-                                                        <i class="fas fa-caret-down me-1"></i><span>-11.5%</span>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="text-danger">
-                                                        <i class="fas fa-caret-down me-1"></i><span>-17,654</span>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="text-success">
-                                                        <i class="fas fa-caret-up me-1"></i><span>28</span>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="text-success">
-                                                        <i class="fas fa-caret-up me-1"></i><span>111</span>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="text-success">
-                                                        <i class="fas fa-caret-up me-1"></i><span>$1,092.72</span>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="text-danger">
-                                                        <i class="fas fa-caret-down me-1"></i><span>$-1.78</span>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="text-success">
-                                                        <i class="fas fa-caret-up me-1"></i><span>$1,092.72</span>
-                                                    </span>
-                                                </td>
-                                                
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
 
+                            {/* tabla 50 mil */}
+                            <div class="card mt-1">
+                                <div class="card-header text-center py-3">
+                                    <h5 class="mb-0 text-center">
+                                        <strong>Usuarios ganadores de 50m mil</strong>
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover text-nowrap ">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">NOMBRE</th>
+                                                    <th scope="col">CÉDULA</th>
+                                                    <th scope="col">TELÉFONO</th>
+                                                    <th scope="col">CÓDIGO</th>
+                                                    <th scope="col">PREMIO</th>
+                                                    <th scope="col">FECHA</th>
+                                                </tr>
+                                            </thead>
 
-                </div>
-            </main>
-            
-        </>
+                                            <tbody>
+                                                {
+                                                DatosTabla2.map((datospremios) => (
+                                                <tr key={datospremios._id}>
+                                                    <td>{datospremios.nombre}</td>
+                                                    <td>{datospremios.cedula}</td>
+                                                    <td>{datospremios.telefono}</td>
+                                                    <td>{datospremios.codigo}</td>
+                                                    <td>{datospremios.premio}</td>
+                                                    <td>{datospremios.fecha}</td>
+                                                </tr>
+                                                )) 
+                                                }
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
 
-    )
+                            {/* tabla 10 mil */}
+                            <div class="card mt-1">
+                                <div class="card-header text-center py-3">
+                                    <h5 class="mb-0 text-center">
+                                        <strong>Usuarios ganadores de 10 mil</strong>
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover text-nowrap ">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">NOMBRE</th>
+                                                    <th scope="col">CÉDULA</th>
+                                                    <th scope="col">TELÉFONO</th>
+                                                    <th scope="col">CÓDIGO</th>
+                                                    <th scope="col">PREMIO</th>
+                                                    <th scope="col">FECHA</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                {
+                                                DatosTabla3.map((datospremios) => (
+                                                <tr key={datospremios._id}>
+                                                    <td>{datospremios.nombre}</td>
+                                                    <td>{datospremios.cedula}</td>
+                                                    <td>{datospremios.telefono}</td>
+                                                    <td>{datospremios.codigo}</td>
+                                                    <td>{datospremios.premio}</td>
+                                                    <td>{datospremios.fecha}</td>
+                                                </tr>
+                                                )) 
+                                                }
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* tabla no ganadores */}
+                            <div class="card mt-1">
+                                <div class="card-header text-center py-3">
+                                    <h5 class="mb-0 text-center">
+                                        <strong>códigos sin premios registrados </strong>
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover text-nowrap ">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">NOMBRE</th>
+                                                    <th scope="col">CÉDULA</th>
+                                                    <th scope="col">TELÉFONO</th>
+                                                    <th scope="col">CÓDIGO</th>
+                                                    <th scope="col">PREMIO</th>
+                                                    <th scope="col">FECHA</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                {
+                                                DatosTabla4.map((datospremios) => (
+                                                <tr key={datospremios._id}>
+                                                    <td>{datospremios.nombre}</td>
+                                                    <td>{datospremios.cedula}</td>
+                                                    <td>{datospremios.telefono}</td>
+                                                    <td>{datospremios.codigo}</td>
+                                                    <td>{datospremios.premio}</td>
+                                                    <td>{datospremios.fecha}</td>
+                                                </tr>
+                                                )) 
+                                                }
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </section>
+
+                    </div>
+                </main>
+            </>
+        )
+
+    }else{
+        //Se redirecciona al login si no existe una varia de usuario valida 
+        window.location= 'http://localhost:5173/'
+    }
 }
 
 export default InfoAdmin
