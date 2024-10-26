@@ -135,12 +135,12 @@ function InfoAdmin(){
                                         <table class="table table-hover text-nowrap ">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">NOMBRE</th>
+                                                    <th scope="col">NOMBRE GANADOR</th>
                                                     <th scope="col">CÉDULA</th>
                                                     <th scope="col">TELÉFONO</th>
                                                     <th scope="col">CÓDIGO</th>
-                                                    <th scope="col">PREMIO</th>
-                                                    <th scope="col">FECHA</th>
+                                                    <th scope="col">PREMIO $</th>
+                                                    <th scope="col">FECHA REGISTRO</th>
                                                 </tr>
                                             </thead>
 
@@ -151,7 +151,7 @@ function InfoAdmin(){
                                                     <td>{datospremios.nombre}</td>
                                                     <td>{datospremios.cedula}</td>
                                                     <td>{datospremios.telefono}</td>
-                                                    <td>{datospremios.codigo} <i><a href="https://img.icons8.com/?size=100&id=P6jWGmVbl2Mb&format=png&color=000000"></a></i></td>
+                                                    <td> <img src="https://img.icons8.com/?size=100&id=P6jWGmVbl2Mb&format=png&color=000000" height="20" alt="" loading="lazy" /> {datospremios.codigo}</td>
                                                     <td>{datospremios.premio}</td>
                                                     <td>{datospremios.fecha}</td>
                                                 </tr>
@@ -168,7 +168,7 @@ function InfoAdmin(){
                             <div class="card mt-1">
                                 <div class="card-header text-center py-3">
                                     <h5 class="mb-0 text-center">
-                                        <strong>Usuarios ganadores de 50m mil</strong>
+                                        <strong>Usuarios ganadores de 50 mil</strong>
                                     </h5>
                                 </div>
                                 <div class="card-body">
@@ -176,12 +176,12 @@ function InfoAdmin(){
                                         <table class="table table-hover text-nowrap ">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">NOMBRE</th>
+                                                    <th scope="col">NOMBRE GANADOR</th>
                                                     <th scope="col">CÉDULA</th>
                                                     <th scope="col">TELÉFONO</th>
                                                     <th scope="col">CÓDIGO</th>
-                                                    <th scope="col">PREMIO</th>
-                                                    <th scope="col">FECHA</th>
+                                                    <th scope="col">PREMIO $</th>
+                                                    <th scope="col">FECHA REGISTRO</th>
                                                 </tr>
                                             </thead>
 
@@ -217,12 +217,12 @@ function InfoAdmin(){
                                         <table class="table table-hover text-nowrap ">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">NOMBRE</th>
+                                                    <th scope="col">NOMBRE GANADOR</th>
                                                     <th scope="col">CÉDULA</th>
                                                     <th scope="col">TELÉFONO</th>
                                                     <th scope="col">CÓDIGO</th>
-                                                    <th scope="col">PREMIO</th>
-                                                    <th scope="col">FECHA</th>
+                                                    <th scope="col">PREMIO $</th>
+                                                    <th scope="col">FECHA REGISTRO</th>
                                                 </tr>
                                             </thead>
 
@@ -262,8 +262,8 @@ function InfoAdmin(){
                                                     <th scope="col">CÉDULA</th>
                                                     <th scope="col">TELÉFONO</th>
                                                     <th scope="col">CÓDIGO</th>
-                                                    <th scope="col">PREMIO</th>
-                                                    <th scope="col">FECHA</th>
+                                                    <th scope="col">PREMIO </th>
+                                                    <th scope="col">FECHA REGISTRO</th>
                                                 </tr>
                                             </thead>
 
