@@ -151,7 +151,7 @@ function InfoAdmin(){
                                                     <td>{datospremios.nombre}</td>
                                                     <td>{datospremios.cedula}</td>
                                                     <td>{datospremios.telefono}</td>
-                                                    <td>{datospremios.codigo}</td>
+                                                    <td>{datospremios.codigo} <i><a href="https://img.icons8.com/?size=100&id=P6jWGmVbl2Mb&format=png&color=000000"></a></i></td>
                                                     <td>{datospremios.premio}</td>
                                                     <td>{datospremios.fecha}</td>
                                                 </tr>
