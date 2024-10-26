@@ -12,15 +12,13 @@ function Login(){
     const [password, setPassword] = useState(null);
     const [error, setError] = useState('');
 
-
-
     const handleSubmitLogin = async (e) => {
         e.preventDefault();
         console.log('Form submitted:', { correo, password });
     
         try {
           //const response = await fetch('https://pocketuxback.vercel.app/apiv1/login', {
-          const response = await fetch('http://localhost:5000/apiv1/login', {
+          const response = await fetch('https://gana-loco-anderb.vercel.app/apiv1/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -29,9 +27,6 @@ function Login(){
           });
 
           const result = await response.json();
-          //const iduser = result.id;
-          //console.log("id del usuario logueado: -> ", iduser, "datos completos:", result);
-    
           if (result.status === "Bienvenido") {
 
             if(result.rol === "User"){
@@ -58,7 +53,7 @@ function Login(){
 
           }
         } catch (error) {
-          console.error('Error:', error);
+          //console.error('Error:', error);
           window.alert("Ha ocurrido un error al consultar las credenciales.");
           //setError('Error en las credenciales');
         }
