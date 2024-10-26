@@ -59,7 +59,12 @@ function Login(){
         }
     };
 
-      
+
+    const nuevousuario = () => {
+        Navigate("/NewUser")
+        //window.location = 'https://gana-loco-ander.vercel.app'
+    };
+
     return (
     <>
         <section class="text-center">
@@ -99,7 +104,7 @@ function Login(){
                             </button>
 
                             <div class="text-center">
-                                <p class="mb-5 pb-lg-2" >Aún no tienes una cuenta? <a href="/NewUser">Registrate aqui</a></p>
+                                <p class="mb-5 pb-lg-2" >Aún no tienes una cuenta? <a href="#" onClick={nuevousuario}> ;Registrate aqui</a></p>
                             </div>
                         </form>
 
