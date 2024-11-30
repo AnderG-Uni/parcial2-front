@@ -157,7 +157,7 @@ function InfoAdmin(){
                                             
                                                 {videos.length > 0 ? (
                                                 videos.map((video) => (
-                                                <div key={video._id} class="card mt-2 mb-3 ms-auto me-2 col col-3 my-auto mx-auto p-2 pe-1 ps-1 pb-0">
+                                                <div key={video._id} class="card mt-2 mb-3 ms-auto me-2 col col-3 my-auto mx-auto p-2 pe-1 ps-1 pb-1">
 
                                                     <div className="card-body p-0">
                                                         <div className="table-responsive text-center">
@@ -167,6 +167,13 @@ function InfoAdmin(){
                                                             <source src={video.Url} type="video/mp4" />
                                                             Video
                                                         </video>
+                                                        <div className='row col col-12'>
+                                                            <img src="https://img.icons8.com/?size=100&id=83311&format=png&color=000000" height="25" className='col col-2 ms-2' title='Comentarios'/>
+                                                            <img src="https://img.icons8.com/?size=100&id=60010&format=png&color=000000" height="25" className='col col-2' title='Me Gusta'/>
+                                                            <img src="https://img.icons8.com/?size=100&id=60712&format=png&color=000000" height="25" className='col col-2 me-3' title='No Me Gusta'/>
+                                                            <p className='col col-1'></p>
+                                                            <p className='Fecha col col-4' title='Fecha de subido el video'>{video.Fecha} </p>
+                                                        </div>
                                                         
                                                         </div>
                                                     </div>

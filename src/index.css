@@ -7,6 +7,11 @@
   height: 20px;
 }
 
+.Fecha{
+  font-size: 12px;
+  text-align: right;
+  margin: 0%;
+}
 
 .logouser{
   height: 80px;

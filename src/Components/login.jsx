@@ -14,7 +14,7 @@ function Login(){
 
     const handleSubmitLogin = async (e) => {
         e.preventDefault();
-        console.log('Form submitted:', { correo, password });
+        //console.log('Form submitted:', { correo, password });
     
         try {
           const response = await fetch('https://uniyoutube-back.vercel.app/apiv1/login', {

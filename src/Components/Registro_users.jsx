@@ -16,7 +16,7 @@ function RegistroUser(){
     const handleClickSubmit = async (e) => {
         e.preventDefault("datos");
         //console.log('Form submitted:', { nombre, fechaN, correo, password, celular, cedula, ciudad });
-
+s
         try {
             const response = await fetch('https://uniyoutube-back.vercel.app/apiv1/new_user', {
             method: 'POST',
@@ -52,10 +52,10 @@ function RegistroUser(){
                 <div class="container-fluid px-1 py-5 mx-auto text-white">
                     <div class="row d-flex justify-content-center">
                         <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-                            <h3>Regitro de usuarios</h3>
+                            <h3 className='Miniatura'>Regitro de usuarios</h3>
                             <p class="blue-text">por favor ingresa todos los datos solicitados.</p>
                             <div class="card">
-                                <h5 class="text-center mb-4">Formulario de registro</h5>
+                                <h5 class="text-center mb-4 Miniatura">Formulario de registro</h5>
                                 <form class="form-card" onSubmit={handleClickSubmit}>
                                     <div class="row justify-content-between text-left">
                                         <div class="form-group col-sm-6 flex-column d-flex mb-2"> 
