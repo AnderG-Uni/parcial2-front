@@ -28,7 +28,7 @@ function InfoAdmin(){
         const CargarVideo = async () => {
             try {
                 //const response = await axios.post('http://localhost:5000/apiv1/GetVideo/', {id});
-                const response = await axios.post('https://uniyoutube-back/apiv1/GetVideo/', {id});
+                const response = await axios.post('https://uniyoutube-back.vercel.app/apiv1/GetVideo/', {id});
                 if (!response.ok) {
                     setVideoR(response.data);
                     //console.log("informacion video a reproducir:", response.data);
@@ -44,7 +44,7 @@ function InfoAdmin(){
             const GetAllVideoUrl = async () => {
                 try {
                 //const response = await axios.get(`http://localhost:5000/apiv1/GetAllVideo`);
-                const response = await axios.get(`https://uniyoutube-back/apiv1/GetAllVideo`);
+                const response = await axios.get(`https://uniyoutube-back.vercel.app/apiv1/GetAllVideo`);
                 if (!response.ok) {
                     setVideos(response.data);
                     //console.log("Datos de los videos:", response.data);

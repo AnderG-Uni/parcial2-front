@@ -38,7 +38,8 @@ function InfoAdmin(){
             formData.append('iduser', iduser);
     
             try {
-                const response = await fetch('http://localhost:5000/apiv1/UploadVideo', {
+                //const response = await fetch('http://localhost:5000/apiv1/UploadVideo', {
+                    const response = await fetch('https://uniyoutube-back.vercel.app/apiv1/UploadVideo', {
                     method: 'POST',
                     body: formData,
                 });
@@ -60,7 +61,8 @@ function InfoAdmin(){
             const user = localStorage.getItem("user");
 
             try {
-                const response = await axios.post('http://localhost:5000/apiv1/GetUserVideo', {user});
+                //const response = await axios.post('http://localhost:5000/apiv1/GetUserVideo', {user});
+                const response = await axios.post('https://uniyoutube-back.vercel.app/apiv1/GetUserVideo', {user});
                 //console.log("Data Videos1:", response.data);
 
                     if (response.data && response.data.length > 0) {
