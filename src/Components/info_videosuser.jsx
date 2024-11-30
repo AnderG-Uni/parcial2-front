@@ -101,7 +101,6 @@ function InfoAdmin(){
                 }
             };
 
-            
             CargarInfoUser();
             CargarAccessLogin();
             GetUserVideoUrl();
@@ -188,9 +187,9 @@ function InfoAdmin(){
                                     <div className='col col-2'></div>
 
                                     <div className='col col-4'>
-                                        <div className="input-group mb-3 col col-6">
+                                        <input type="text" className="form-control m-0" id="NombreVideo" title='Título del video' placeholder='Título del video...'  />
+                                        <div className="input-group col col-6">
                                         <input type="file" className="form-control" id="videoFile" title='Archivo de video' accept='video/*'  />
-                                        <input type="text" className="form-control" id="NombreVideo" title='Titulo del video' placeholder='Título...'  />
                                         
                                         <button className='btn btn-primary' onClick={UploadVideo}>Subir</button>
                                         </div>
