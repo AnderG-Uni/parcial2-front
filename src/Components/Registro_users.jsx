@@ -18,7 +18,7 @@ function RegistroUser(){
         //console.log('Form submitted:', { nombre, fechaN, correo, password, celular, cedula, ciudad });
 
         try {
-            const response = await fetch('https://gana-loco-anderb.vercel.app/apiv1/new_user', {
+            const response = await fetch('https://uniyoutube-back.vercel.app/apiv1/new_user', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ function RegistroUser(){
     }
 
     const handleatras = () => {
-        window.location = 'https://gana-loco-ander.vercel.app'
+        window.location = 'https://uniyoutube.vercel.app'
     };
 
     return (

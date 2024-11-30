@@ -16,7 +16,7 @@ function InfoAdmin(){
 
         const handleLogout = () => {
             localStorage.clear();
-            window.location = 'https://gana-loco-ander.vercel.app'
+            window.location = 'https://uniyoutube.vercel.app'
         };
 
         // Función para subir el video
@@ -82,7 +82,7 @@ function InfoAdmin(){
             const CargarInfoUser = async () => {
                 try {
                     const user = localStorage.getItem("user"); //obtengo el (usuario) del usuario autenticado  del local storage
-                    const response2 = await axios.post('https://gana-loco-anderb.vercel.app/apiv1/info_user', {user});
+                    const response2 = await axios.post('https://uniyoutube-back.vercel.app/apiv1/info_user', {user});
                     setDatosUser(response2.data);
                 } catch (error) {
                 console.error(error);
@@ -92,7 +92,7 @@ function InfoAdmin(){
             const CargarAccessLogin = async () => {
                 try {
                     const user = localStorage.getItem("user"); //obtengo el (usuario) del usuario autenticado  del local storage
-                    const response3 = await axios.post('https://gana-loco-anderb.vercel.app/apiv1/info_audit_users', {user});
+                    const response3 = await axios.post('https://uniyoutube-back.vercel.app/apiv1/info_audit_users', {user});
                     setAuditLogin(response3.data);
                 } catch (error) {
                 console.error(error);
@@ -235,7 +235,7 @@ function InfoAdmin(){
 
     }else{
         //Se redirecciona al login si no existe una varia de usuario valida 
-        window.location= 'https://gana-loco-ander.vercel.app' // ruta de ront
+        window.location= 'https://uniyoutube.vercel.app' // ruta de ront
     }
 }
 
