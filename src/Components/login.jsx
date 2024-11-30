@@ -40,25 +40,21 @@ function Login(){
             
           } else {
             //setError('Usuario o clave incorrecto');
-            //if (error === null) { console.log(error) }else {console.log(error)}
             window.alert("Usuario o clave incorrecto");
 
           }
         } catch (error) {
           //console.error('Error:', error);
           window.alert("Ha ocurrido un error al consultar las credenciales.");
-          //setError('Error en las credenciales');
         }
     };
 
 
     const nuevousuario = () => {
         Navigate("/NewUser")
-        //window.location = 'https://gana-loco-ander.vercel.app'
     };
     const nuevoadmin = () => {
         Navigate("/NewAdmin")
-        //window.location = 'https://gana-loco-ander.vercel.app'
     };
 
     return (
