@@ -17,8 +17,8 @@ function Login(){
         console.log('Form submitted:', { correo, password });
     
         try {
-          //const response = await fetch('https://pocketuxback.vercel.app/apiv1/login', {
-          const response = await fetch('https://gana-loco-anderb.vercel.app/apiv1/login', {
+          //const response = await fetch('https://gana-loco-anderb.vercel.app/apiv1/login', {
+          const response = await fetch('http://localhost:5000/apiv1/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -34,15 +34,7 @@ function Login(){
                 localStorage.setItem('id', result.id);
                 localStorage.setItem('user', result.user);
                 localStorage.setItem('role', result.rol);
-                Navigate("/InfoUser");
-
-                //onLoginSuccess(result.rol);
-            } else if (result.rol === "Admin"){
-                //console.log(`User: ${result.user}, Role: ${result.rol}`);
-                localStorage.setItem('id', result.id);
-                localStorage.setItem('user', result.user);
-                localStorage.setItem('role', result.rol);
-                Navigate("/infoAdmin");
+                Navigate("/InicioUser");
                 //onLoginSuccess(result.rol);
             }
             
@@ -72,41 +64,43 @@ function Login(){
     return (
     <>
         <section class="text-center">
-        <div class="p-5 bg-transparent text-white" >
+        <div class="pt-4 bg-transparent text-white" >
 
-            <h2 onClick={nuevoadmin}>Promoxión Gana Loco <span> <h5>de papas unicatolica </h5></span></h2>
+            <h2>UniYouTube <span> <h5>Plataforma de videos universitaria </h5></span></h2>
 
         </div>
         
         <div className='row  contenedorlogin'>
 
-                <div className='col-2'></div>
-                <div className='col-8'>
+                <div className='col-4'></div>
 
-                    <div class="card shadow-5-strong bg-white " >
-
+                <div className='col-4'>
+                    <div class="card shadow-5-strong mt-5 bg-white p-1 " >
             
-                    <div class="card-body px-md-5">
+                    <div class="card-body p-0 ps-3 pe-3">
+                            <div class=" justify-content-center">
 
-                            <div class="row d-flex justify-content-center">
-
-                                <div className="col-lg-5">
-                                    <img src="https://img.freepik.com/vector-gratis/ilustracion-dibujos-animados-patata-dibujada-mano_23-2150677012.jpg" class="img-fluid" alt="Sample image" />
+                                <div className='row col-12 p-0 m-0'>
+                                    <div className='col-lg-4'></div>
+                                    <div className="col-lg-4">
+                                      <img src="https://img.freepik.com/vector-gratis/ilustracion-dibujos-animados-patata-dibujada-mano_23-2150677012.jpg" class="img-fluid" alt="Sample image" />
+                                    </div>
+                                    <div className='col-lg-4'></div>
                                 </div>
                                 
-                                <div class="col-lg-7">
-                                <h2 class="fw-bold mb-5">Iniciar Sesión</h2>
+                                <div class="col-lg-12">
+                                <h4 class="fw-bold mb-1">Iniciar Sesión</h4>
                                 <form onSubmit={handleSubmitLogin}>
 
                                     <div class="d-flex justify-content-center">
                                     
                                         <div className="row "> 
-                                        <div data-mdb-input-init class="form-outline mb-4">
+                                        <div data-mdb-input-init class="form-outline mb-2">
                                         <label class="form-label col-12 text-start" htmlFor="email"><strong>Usuario </strong></label>
                                         <input type="email" placeholder='example@ezample.com' id="email" class="form-control" value={correo} onChange={(e) => setCorreo(e.target.value)} required/>
                                         </div>
 
-                                        <div data-mdb-input-init class="form-outline mb-4">
+                                        <div data-mdb-input-init class="form-outline mb-2">
                                         <label class="form-label col-12 text-start" for="form3Example4"> <strong>Clave</strong></label>
                                         <input type="password" id="form3Example4" class="form-control" placeholder='***********' value={password} onChange={(e) => setPassword(e.target.value)} required/>
                                         
@@ -115,32 +109,29 @@ function Login(){
 
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary btn-block mb-4"  >
+                                    <button type="submit" class="btn btn-primary btn-block mb-2"  >
                                     Iniciar Sesión
                                     </button>
 
                                     <div class="text-center">
-                                        <p class="mb-5 pb-lg-2" >¿Aún no tienes una cuenta?  <a href="#" onClick={nuevousuario}> Registrate aqui</a></p>
+                                        <p class="mb-1 pb-lg-2" >¿Aún no tienes una cuenta?  <a href="#" onClick={nuevousuario}> Registrate aqui</a></p>
                                     </div>
                                 </form>
 
                                 </div>
-
                             </div>
-
                     </div>
-                
-
+            
                     </div>
-
                 </div>
-        <div className='col-2'></div>
+
+                <div className='col-4'></div>
 
 
 
         </div>
 
-        <div class="p-5 bg-transparent bg-image" ></div>
+        
         </section>
 
   

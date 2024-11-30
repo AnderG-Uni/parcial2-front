@@ -22,6 +22,9 @@
   margin-top: -500px;
   padding-top: -500px;
 }
+.Miniatura{
+  cursor: pointer;
+}
 
 .modal {
   background: white;
