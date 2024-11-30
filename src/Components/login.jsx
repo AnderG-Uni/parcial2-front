@@ -83,7 +83,7 @@ function Login(){
                                 <div className='row col-12 p-0 m-0'>
                                     <div className='col-lg-4'></div>
                                     <div className="col-lg-4">
-                                      <img src="https://img.freepik.com/vector-gratis/ilustracion-dibujos-animados-patata-dibujada-mano_23-2150677012.jpg" class="img-fluid" alt="Sample image" />
+                                      <img src="https://img.icons8.com/?size=100&id=9pYYRMkYN2BY&format=png&color=000000" class="img-fluid" alt="Sample image" />
                                     </div>
                                     <div className='col-lg-4'></div>
                                 </div>
@@ -97,7 +97,7 @@ function Login(){
                                         <div className="row "> 
                                         <div data-mdb-input-init class="form-outline mb-2">
                                         <label class="form-label col-12 text-start" htmlFor="email"><strong>Usuario </strong></label>
-                                        <input type="email" placeholder='example@ezample.com' id="email" class="form-control" value={correo} onChange={(e) => setCorreo(e.target.value)} required/>
+                                        <input type="email" placeholder='example@example.com' id="email" class="form-control" value={correo} onChange={(e) => setCorreo(e.target.value)} required/>
                                         </div>
 
                                         <div data-mdb-input-init class="form-outline mb-2">

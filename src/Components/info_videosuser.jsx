@@ -218,7 +218,7 @@ function InfoAdmin(){
                                                 </div>
                                             ))
                                             ) : (
-                                                  <h5>No hay videos en la plataforma</h5>
+                                                  <h5 className='mb-5 pb-5'>No hay videos en la plataforma</h5>
                                             )}
 
 
